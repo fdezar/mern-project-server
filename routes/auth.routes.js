@@ -128,4 +128,32 @@ router.get("/verify", isAuthenticated, (req, res, next) => {
   res.status(200).json(req.payload);
 });
 
+router.get("/logout", isAuthenticated, (req, res, next) => {
+
+})
+
+router.get("/:userId", isAuthenticated, (req, res, next) => {
+
+})
+
+router.get("/:userId/edit", isAuthenticated, (req, res, next) => {
+
+})
+
+router.put("/:userId/edit", isAuthenticated, (req, res, next) => {
+
+})
+
+router.get("/:userId/delete", isAuthenticated, (req, res, next) => {
+
+})
+
+router.delete("/:userId/delete", isAuthenticated, (req, res, next) => {
+
+})
+
+router.get("/:userId/delete-image", isAuthenticated, (req, res, next) => {
+
+})
+
 module.exports = router;
