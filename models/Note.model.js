@@ -13,6 +13,10 @@ const noteSchema = new Schema(
         content: {
             type: String,
             required: true
+        },
+        headerImage: {
+            type: String,
+            default: ""
         }
     },
     {

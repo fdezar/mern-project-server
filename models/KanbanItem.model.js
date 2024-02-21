@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose");
 
-const kanbanCardSchema = new Schema(
+const kanbanItemSchema = new Schema(
     {
        title: {
             type: String,
@@ -9,7 +9,7 @@ const kanbanCardSchema = new Schema(
             type: String,
        },
        status: {
-        
+        // enum
        }
     },
     {
@@ -17,6 +17,6 @@ const kanbanCardSchema = new Schema(
     }
 )
 
-const KanbanCard = model("Kanbancard", kanbanCardSchema);
+const KanbanItem = model("KanbanItem", kanbanItemSchema);
 
-module.exports = KanbanCard;
+module.exports = KanbanItem;

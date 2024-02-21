@@ -1,13 +1,15 @@
 const express = require("express");
 const router = express.Router();
 
+const Note = require("../models/Note.model");
+
 router.get("/", (req, res, next) => {
 
 });
 
-router.get("/create", (req, res, next) => {
+// router.get("/create", (req, res, next) => {
 
-});
+// });
 
 router.post("/create", (req, res, next) => {
 
@@ -21,9 +23,9 @@ router.post("/:id", (req, res, next) => {
 
 });
 
-router.get("/:id/edit", (req, res, next) => {
+// router.get("/:id/edit", (req, res, next) => {
 
-});
+// });
 
 router.put("/:id/edit", (req, res, next) => {
 

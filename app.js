@@ -5,6 +5,8 @@ require("dotenv").config();
 // ℹ️ Connects to the database
 require("./db");
 
+const { isAuthenticated } = require("./middleware/jwt.middleware");
+
 // Handles http requests (express is node js framework)
 // https://www.npmjs.com/package/express
 const express = require("express");
@@ -22,10 +24,10 @@ const authRoutes = require("./routes/auth.routes");
 app.use("/auth", authRoutes);
 
 const kanbanRoutes = require("./routes/kanban.routes");
-app.use("/kanban", kanbanRoutes);
+app.use("/kanban", isAuthenticated, kanbanRoutes);
 
 const notesRoutes = require("./routes/notes.routes");
-app.use("/notes", notesRoutes);
+app.use("/notes", isAuthenticated, notesRoutes);
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
