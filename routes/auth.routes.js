@@ -146,27 +146,27 @@ router.post("/upload-image", fileUploader.single("userImage"), (req, res, next) 
 
 })
 
-router.get("/:userId", isAuthenticated, (req, res, next) => {
+// router.get("/:userId", isAuthenticated, (req, res, next) => {
+
+// })
+
+// router.post("/:userId", isAuthenticated, (req, res, next) => {
+  
+// })
+
+// router.get("/:userId/edit", isAuthenticated, (req, res, next) => {
+
+// })
+
+router.put("/:userId", isAuthenticated, (req, res, next) => {
 
 })
 
-router.get("/:userId/edit", isAuthenticated, (req, res, next) => {
+router.delete("/:userId", isAuthenticated, (req, res, next) => {
 
 })
 
-router.put("/:userId/edit", isAuthenticated, (req, res, next) => {
-
-})
-
-router.get("/:userId/delete", isAuthenticated, (req, res, next) => {
-
-})
-
-router.delete("/:userId/delete", isAuthenticated, (req, res, next) => {
-
-})
-
-router.get("/:userId/delete-image", isAuthenticated, (req, res, next) => {
+router.delete("/:userId/image", isAuthenticated, (req, res, next) => {
 
 })
 
