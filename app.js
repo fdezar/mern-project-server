@@ -24,10 +24,10 @@ const authRoutes = require("./routes/auth.routes");
 app.use("/auth", authRoutes);
 
 const kanbanRoutes = require("./routes/kanban.routes");
-app.use("/kanban", isAuthenticated, kanbanRoutes);
+app.use("/kanban", /* isAuthenticated, */ kanbanRoutes);
 
 const notesRoutes = require("./routes/notes.routes");
-app.use("/notes", isAuthenticated, notesRoutes);
+app.use("/notes", /*isAuthenticated, */ notesRoutes);
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);

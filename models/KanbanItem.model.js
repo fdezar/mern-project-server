@@ -9,7 +9,8 @@ const kanbanItemSchema = new Schema(
             type: String,
        },
        status: {
-        // enum
+            type: String,
+            enum: ['To Do', 'In Progress', 'Completed']
        }
     },
     {
