@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
+const mongoose = require("mongoose");
+
 // ℹ️ Handles password encryption
 const bcrypt = require("bcrypt");
 
@@ -131,9 +133,9 @@ router.get("/verify", isAuthenticated, (req, res, next) => {
   res.status(200).json(req.payload);
 });
 
-router.get("/logout", isAuthenticated, (req, res, next) => {
+// router.get("/logout", isAuthenticated, (req, res, next) => {
 
-})
+// })
 
 router.post("/upload-image", fileUploader.single("userImage"), (req, res, next) => {
 
@@ -148,6 +150,8 @@ router.post("/upload-image", fileUploader.single("userImage"), (req, res, next) 
 
 router.get("/:userId", isAuthenticated, (req, res, next) => {
   const { userId } = req.params;
+
+  // ToDo - mirar que si estás en un perfil ajeno, puedas acceder al tuyo. Keep the profile page to the currentUser
 
   const { currentUser } = req.session;
 

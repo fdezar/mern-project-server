@@ -8,9 +8,13 @@ const kanbanItemSchema = new Schema(
        description: {
             type: String,
        },
-       status: {
-            type: String,
-            enum: ['To Do', 'In Progress', 'Completed']
+       kanbanParent: {
+            type: Schema.Types.ObjectId,
+            ref: "Kanban"
+       },
+       authorId: {
+          type: Schema.Types.ObjectId,
+          ref: "User"
        }
     },
     {

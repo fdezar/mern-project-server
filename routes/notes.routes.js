@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const mongoose = require("mongoose");
 
 const fileUploader = require("../config/cloudinary.config");
 
@@ -7,6 +8,7 @@ const Note = require("../models/Note.model");
 
 router.get("/", (req, res, next) => {
     Note.find()
+        // ToDo - asignar notas al usuario
         .then(allNotes => {
             return res.json(allNotes);
         })

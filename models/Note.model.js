@@ -2,8 +2,8 @@ const { Schema, model } = require("mongoose");
 
 const noteSchema = new Schema(
     {
-        users: {
-            type: [ Schema.Types.ObjectId ],
+        author: {
+            type: Schema.Types.ObjectId,
             ref: "User"
         },
         title: {
