@@ -9,7 +9,7 @@ const kanbanSchema = new Schema(
             type: Schema.Types.ObjectId,
             ref: "KanbanItem"
        }],
-       authorId: {
+       user: {
             type: Schema.Types.ObjectId,
             ref: "User"
        }

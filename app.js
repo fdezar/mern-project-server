@@ -23,9 +23,6 @@ app.use("/api", indexRoutes);
 const authRoutes = require("./routes/auth.routes");
 app.use("/auth", authRoutes);
 
-const boardRoutes = require("./routes/board.routes");
-app.use("/board", /* isAuthenticated, */ boardRoutes);
-
 const kanbanRoutes = require("./routes/kanban.routes");
 app.use("/kanban", /* isAuthenticated, */ kanbanRoutes);
 

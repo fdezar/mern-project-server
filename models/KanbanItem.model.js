@@ -12,7 +12,7 @@ const kanbanItemSchema = new Schema(
             type: Schema.Types.ObjectId,
             ref: "Kanban"
        },
-       authorId: {
+       user: {
           type: Schema.Types.ObjectId,
           ref: "User"
        }

@@ -2,7 +2,7 @@ const { Schema, model } = require("mongoose");
 
 const noteSchema = new Schema(
     {
-        author: {
+        user: {
             type: Schema.Types.ObjectId,
             ref: "User"
         },
@@ -13,10 +13,6 @@ const noteSchema = new Schema(
         content: {
             type: String,
             required: true
-        },
-        headerImage: {
-            type: String,
-            default: ""
         }
     },
     {
