@@ -7,9 +7,6 @@ const User = require("../models/User.model");
 
 router.post("/create", (req, res, next) => {
   const { title } = req.body;
-
-  console.log(req.payload);
-
   const { _id } = req.payload;
 
   const kanban = {
@@ -24,8 +21,8 @@ router.post("/create", (req, res, next) => {
   Kanban.create(kanban)
     .then(newKanban => {
       return User.findByIdAndUpdate(
-        newKanban.user,
-        { $push: { userKanban: newKanban.user }}
+        _id,
+        { $push: { userKanban: newKanban._id }}
       );
     })
     .then(response => {
@@ -77,6 +74,7 @@ router.put("/:kanbanId", (req, res, next) => {
 
 router.delete("/:kanbanId", (req, res, next) => {
   const { kanbanId } = req.params;
+  const { _id } = req.payload;
 
   if (!mongoose.Types.ObjectId.isValid(kanbanId)) {
     res.status(400).json({ message: "No kanban item found with this id" });
@@ -86,7 +84,7 @@ router.delete("/:kanbanId", (req, res, next) => {
   Kanban.findByIdAndDelete(kanbanId)
     .then(() => {
       return User.findByIdAndUpdate(
-        kanbanId,
+        _id,
         { $pull: { userKanban: kanbanId }},
         { new: true }
       );
