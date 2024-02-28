@@ -8,13 +8,11 @@ const KanbanItem = require("../models/KanbanItem.model");
 router.post("/:kanbanId/createItem", (req, res, next) => {
   const { kanbanId } = req.params;
   const { title, description } = req.body;
-//   const { _id } = req.payload;
   const kanbanItem = {
     title: title,
     description: description,
-    kanbanParent: kanbanId,
+    kanbanParent: kanbanId
   };
-//   kanbanItem.user = _id;
 
   KanbanItem.create(kanbanItem)
     .then((newKanbanItem) => {
@@ -61,8 +59,6 @@ router.delete("/:kanbanId/:kanbanItemId", (req, res, next) => {
     res.status(400).json({ message: "No kanban item found with this id" });
     return;
   }
-
-  // ToDo - el kanban funciona borrando el item, pero se queda en el array del padre
 
   KanbanItem.findByIdAndDelete(kanbanItemId)
     .then(() => {

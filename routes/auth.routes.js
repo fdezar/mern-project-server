@@ -151,7 +151,7 @@ router.get("/:userId", isAuthenticated, (req, res, next) => {
 
   // ToDo - mirar que si estás en un perfil ajeno, puedas acceder al tuyo. Keep the profile page to the currentUser
 
-  const { currentUser } = req.session;
+  // const { _id } = req.payload;
 
   if (!mongoose.Types.ObjectId.isValid(userId)) {
     res.status(400).json({ message: "Specified id is not valid" });
@@ -217,12 +217,25 @@ router.delete("/:userId", isAuthenticated, (req, res, next) => {
     });
 });
 
+router.put("/:userId/update-image", isAuthenticated, (req, res, next) => {
+  const { userId } = req.params;
+
+  User.findOneAndUpdate({ _id: userId }, { userImage: "" }) // ToDo - mirar esto
+    .then(() => {
+      return res.json({ message: `${userId} image updated successfully` }); 
+    })
+    .catch((err) => {
+      console.error("Error updating user image:", err);
+      res.status(500).json({ message: "Error updating user image" });
+    });
+})
+
 router.put("/:userId/delete-image", isAuthenticated, (req, res, next) => {
   const { userId } = req.params;
 
-  User.findOneAndUpdate({ _id: userId }, { userImage: "" })
+  User.findOneAndUpdate({ _id: userId }, { userImage: "" }) // ToDo - mirar esto
     .then(() => {
-      res.redirect(`/auth/${id}/ `); // ToDo - mirar esto
+      return res.json({ message: `${userId} image deleted successfully` }); 
     })
     .catch((err) => {
       next(err);
