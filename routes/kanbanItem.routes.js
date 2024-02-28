@@ -5,18 +5,18 @@ const mongoose = require("mongoose");
 const Kanban = require("../models/Kanban.model");
 const KanbanItem = require("../models/KanbanItem.model");
 
-router.post("/:kanbanId/create", (req, res, next) => {
+router.post("/:kanbanId/createItem", (req, res, next) => {
   const { kanbanId } = req.params;
   const { title, description } = req.body;
-  const { _id } = req.payload;
+//   const { _id } = req.payload;
   const kanbanItem = {
     title: title,
     description: description,
     kanbanParent: kanbanId,
   };
-  kanbanItem.user = _id;
+//   kanbanItem.user = _id;
 
-  KanbanItem.create({ title, description, kanbanParent, authorId })
+  KanbanItem.create(kanbanItem)
     .then((newKanbanItem) => {
       return Kanban.findByIdAndUpdate(kanbanId, {
         $push: { kanbanItems: newKanbanItem._id },
@@ -62,9 +62,18 @@ router.delete("/:kanbanId/:kanbanItemId", (req, res, next) => {
     return;
   }
 
+  // ToDo - el kanban funciona borrando el item, pero se queda en el array del padre
+
   KanbanItem.findByIdAndDelete(kanbanItemId)
     .then(() => {
-      res.json({
+        return Kanban.findByIdAndUpdate(
+            kanbanId,
+            { $pull: { kanbanItems: kanbanItemId } },
+            { new: true }
+        );
+    })
+    .then(() => {
+      return res.json({
         message: `Kanban item ${kanbanItemId} deleted successfully.`,
       });
     })

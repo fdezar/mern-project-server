@@ -11,10 +11,6 @@ const kanbanItemSchema = new Schema(
        kanbanParent: {
             type: Schema.Types.ObjectId,
             ref: "Kanban"
-       },
-       user: {
-          type: Schema.Types.ObjectId,
-          ref: "User"
        }
     },
     {

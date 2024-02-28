@@ -5,6 +5,8 @@ const mongoose = require("mongoose");
 const Note = require("../models/Note.model");
 
 router.get("/", (req, res, next) => {
+  const { _id } = req.payload;
+
   Note.find()
     // ToDo - asignar notas al usuario
     .then((allNotes) => {
@@ -24,8 +26,9 @@ router.post("/create", (req, res, next) => {
     title: title,
     content: content,
   };
+  note.user = _id;
 
-  Note.create({ users, title, content })
+  Note.create(note)
     .then((newNote) => {
       return res.json(newNote);
     })

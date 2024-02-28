@@ -3,9 +3,13 @@ const router = express.Router();
 const mongoose = require("mongoose");
 
 const Kanban = require("../models/Kanban.model");
+const User = require("../models/User.model");
 
 router.post("/create", (req, res, next) => {
   const { title } = req.body;
+
+  console.log(req.payload);
+
   const { _id } = req.payload;
 
   const kanban = {
@@ -13,9 +17,19 @@ router.post("/create", (req, res, next) => {
   };
   kanban.user = _id;
 
-  Kanban.create({ title })
-    .then((newKanban) => {
-      return res.json(newKanban);
+//   if (User.Kanban.length) {
+//      // ToDo - cómo poner el límite. Dónde lo voy a definir? Lo voy a diefinir en variable global como app use...?
+//   }
+
+  Kanban.create(kanban)
+    .then(newKanban => {
+      return User.findByIdAndUpdate(
+        newKanban.user,
+        { $push: { userKanban: newKanban.user }}
+      );
+    })
+    .then(response => {
+      return res.json(response);
     })
     .catch((err) => {
       console.error("Error creating Kanban:", err);
@@ -26,7 +40,7 @@ router.post("/create", (req, res, next) => {
 router.get("/:kanbanId", (req, res, next) => {
   const { kanbanId } = req.params;
 
-  if (!mongoose.Types.ObjectId.isValid(gameId)) {
+  if (!mongoose.Types.ObjectId.isValid(kanbanId)) {
     res.status(400).json({ message: "Specified kanban id is not valid" });
     return;
   }
@@ -52,7 +66,7 @@ router.put("/:kanbanId", (req, res, next) => {
   }
 
   Kanban.findByIdAndUpdate(kanbanId, { title }, { new: true })
-    .then((updatedKanban) => {
+    .then(updatedKanban => {
       return res.json(updatedKanban);
     })
     .catch((err) => {
@@ -71,7 +85,14 @@ router.delete("/:kanbanId", (req, res, next) => {
 
   Kanban.findByIdAndDelete(kanbanId)
     .then(() => {
-      res.json({ message: `Kanban item ${kanbanId} deleted successfully.` });
+      return User.findByIdAndUpdate(
+        kanbanId,
+        { $pull: { userKanban: kanbanId }},
+        { new: true }
+      );
+    })
+    .then(() => {
+      return res.json({ message: `Kanban item ${kanbanId} deleted successfully.` });
     })
     .catch((err) => {
       console.error("Error in Kanban item removal", err);
