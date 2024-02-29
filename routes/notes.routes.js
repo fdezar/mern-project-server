@@ -6,12 +6,11 @@ const Note = require("../models/Note.model");
 const User = require("../models/User.model");
 
 router.get("/", (req, res, next) => {
-  // const { _id } = req.payload;
+  const { _id } = req.payload;
 
-  Note.find()
-    // ToDo - asignar notas al usuario
-    .then((allNotes) => {
-      return res.json(allNotes);
+  Note.find({ user: _id })
+    .then((userNotes) => {
+      return res.json(userNotes);
     })
     .catch((err) => {
       console.error("Error retrieving all notes:", err);

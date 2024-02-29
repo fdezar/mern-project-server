@@ -27,7 +27,7 @@ const kanbanRoutes = require("./routes/kanban.routes");
 app.use("/kanban", isAuthenticated, kanbanRoutes);
 
 const kanbanItemRoutes = require("./routes/kanbanItem.routes");
-app.use("/kanban", /* isAuthenticated, */ kanbanItemRoutes);
+app.use("/kanban", isAuthenticated, kanbanItemRoutes);
 
 const notesRoutes = require("./routes/notes.routes");
 app.use("/notes", isAuthenticated, notesRoutes);
