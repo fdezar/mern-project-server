@@ -133,19 +133,6 @@ router.get("/verify", isAuthenticated, (req, res, next) => {
   res.status(200).json(req.payload);
 });
 
-router.post(
-  "/upload-image",
-  fileUploader.single("userImage"),
-  (req, res, next) => {
-    if (!req.file) {
-      next(new Error("No file uploaded!"));
-      return;
-    }
-
-    res.json({ fileUrl: req.file.path });
-  }
-);
-
 router.get("/:userId", isAuthenticated, (req, res, next) => {
   const { userId } = req.params;
 
@@ -171,7 +158,6 @@ router.get("/:userId", isAuthenticated, (req, res, next) => {
 router.put(
   "/:userId",
   isAuthenticated,
-  fileUploader.single("userImage"),
   (req, res, next) => {
     const { userId } = req.params;
     const { username, firstName, lastName, email, password, aboutMe } =
@@ -217,10 +203,38 @@ router.delete("/:userId", isAuthenticated, (req, res, next) => {
     });
 });
 
-router.put("/:userId/update-image", isAuthenticated, (req, res, next) => {
+router.post(
+  "/upload-image",
+  isAuthenticated,
+  fileUploader.single("userImage"),
+  (req, res, next) => {
+
+    const { _id } = req.payload;
+
+    if (!req.file) {
+      next(new Error("No file uploaded!"));
+      return;
+    }
+
+    User.findByIdAndUpdate(
+      _id,
+      { $set: { userImage: req.file.path }}, 
+      { new: true }
+      )
+      .then(() => {
+        return res.json({ fileUrl: req.file.path });
+      })
+      .catch((err) => {
+        console.error("Error in file uploading:", err);
+        res.status(500).json({ message: "Error in file uploading" });
+      });
+  }
+);
+
+router.put("/:userId/update-image", isAuthenticated, fileUploader.single("userImage"), (req, res, next) => {
   const { userId } = req.params;
 
-  User.findOneAndUpdate({ _id: userId }, { userImage: "" }) // ToDo - mirar esto
+  User.findByIdAndUpdate({ _id: userId }, { $set: { userImage: req.file.path }}, { new: true }) // ToDo - mirar esto
     .then(() => {
       return res.json({ message: `${userId} image updated successfully` }); 
     })
@@ -233,7 +247,7 @@ router.put("/:userId/update-image", isAuthenticated, (req, res, next) => {
 router.put("/:userId/delete-image", isAuthenticated, (req, res, next) => {
   const { userId } = req.params;
 
-  User.findOneAndUpdate({ _id: userId }, { userImage: "" }) // ToDo - mirar esto
+  User.findByIdAndUpdate({ _id: userId }, { userImage: "/images/default-user-image.png" }, { new: true }) // ToDo - cambiar ruta si es necesario de la imagen
     .then(() => {
       return res.json({ message: `${userId} image deleted successfully` }); 
     })
