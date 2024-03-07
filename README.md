@@ -37,6 +37,8 @@ Below are the routes available in the server-side application:
 | `/api/auth/my-profile`        | PUT    | Updates user profile information                              |
 | `/api/auth/my-profile`        | DELETE | Deletes user profile                                          |
 | `/api/auth/upload-image`      | POST   | Uploads user profile image                                    |
+| `/api/auth/my-profile/update-image`           | PUT    | Updates the user's profile image                          |
+| `/api/auth/my-profile/delete-image`           | PUT    | Deletes the user's profile image                          |
 | `/api/kanban`                 | GET    | Retrieves all kanban boards for the authenticated user        |
 | `/api/kanban/create`          | POST   | Creates a new kanban board for the authenticated user         |
 | `/api/kanban/:kanbanId`       | GET    | Retrieves a specific kanban board by ID                       |
@@ -50,6 +52,151 @@ Below are the routes available in the server-side application:
 | `/api/notes/:noteId`          | GET    | Retrieves a specific note by ID                               |
 | `/api/notes/:noteId`          | PUT    | Updates a specific note by ID                                 |
 | `/api/notes/:noteId`          | DELETE | Deletes a specific note by ID                                 |
+
+## Models
+
+### User Model
+
+```javascript
+const { Schema, model } = require("mongoose");
+
+const userSchema = new Schema(
+  {
+    username: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true,
+    },
+    firstName: {
+      type: String,
+      trim: true
+    },
+    lastName: {
+      type: String,
+      trim: true
+    },
+    email: {
+      type: String,
+      required: [true, "Email is required."],
+      unique: true,
+      lowercase: true,
+      trim: true,
+    },
+    password: {
+      type: String,
+      required: [true, "Password is required."],
+    },
+    userImage: {
+      type: String,
+      default: "/images/default-icon.png"
+    },
+    aboutMe: String,
+    userKanban: {
+      type: Schema.Types.ObjectId,
+      ref: "Kanban"
+    },
+    userNotes: [{
+      type: Schema.Types.ObjectId,
+      ref: "Note"
+    }]
+  },
+  {
+    timestamps: true,
+  }
+);
+
+const User = model("User", userSchema);
+
+module.exports = User;
+```
+
+## Kanban Model
+
+```javascript
+const { Schema, model } = require("mongoose");
+
+const kanbanSchema = new Schema(
+    {
+       title: {
+            type: String,
+       },
+       kanbanItems: [{
+            type: Schema.Types.ObjectId,
+            ref: "KanbanItem"
+       }],
+       user: {
+            type: Schema.Types.ObjectId,
+            ref: "User"
+       }
+    },
+    {
+        timestamps: true,
+    }
+)
+
+const Kanban = model("Kanban", kanbanSchema);
+
+module.exports = Kanban;
+```
+
+## KanbanItem Model
+
+```javascript
+const { Schema, model } = require("mongoose");
+
+const kanbanItemSchema = new Schema(
+    {
+       title: {
+            type: String,
+       },
+       description: {
+            type: String,
+       },
+       kanbanParent: {
+            type: Schema.Types.ObjectId,
+            ref: "Kanban"
+       }
+    },
+    {
+        timestamps: true,
+    }
+)
+
+const KanbanItem = model("KanbanItem", kanbanItemSchema);
+
+module.exports = KanbanItem;
+```
+
+## Note Model
+
+```javascript
+const { Schema, model } = require("mongoose");
+
+const noteSchema = new Schema(
+    {
+        user: {
+            type: Schema.Types.ObjectId,
+            ref: "User"
+        },
+        title: {
+            type: String,
+            required: true
+        },
+        content: {
+            type: String,
+            required: true
+        }
+    },
+    {
+        timestamps: true,
+    }
+)
+
+const Note = model("Note", noteSchema);
+
+module.exports = Note;
+```
 
 ## Getting Started
 
