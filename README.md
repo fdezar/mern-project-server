@@ -23,6 +23,34 @@ This repository contains the server-side code for the Productivity App, a full-s
 - Mongoose: MongoDB object modeling tool for Node.js
 - Bcrypt: Library for hashing passwords for secure authentication
 
+## Routes
+
+| Method | Endpoint                                 | Description                                            |
+| ------ | ---------------------------------------- | ------------------------------------------------------ |
+| GET    | /                                         | Test endpoint                                          |
+| POST   | /auth/signup                             | Creates a new user in the database                     |
+| POST   | /auth/login                              | Verifies email and password and returns a JWT          |
+| GET    | /auth/verify                             | Used to verify JWT stored on the client                |
+| GET    | /auth/my-profile                         | Retrieves the profile of the authenticated user        |
+| PUT    | /auth/my-profile                         | Updates the profile of the authenticated user          |
+| DELETE | /auth/my-profile                         | Deletes the profile of the authenticated user          |
+| POST   | /auth/upload-image                       | Uploads an image for the authenticated user            |
+| PUT    | /auth/:userId/update-image               | Updates the image of the specified user                |
+| PUT    | /auth/:userId/delete-image               | Deletes the image of the specified user                |
+| POST   | /kanban/:kanbanId/createItem             | Creates a new item in a Kanban board                  |
+| PUT    | /kanban/:kanbanId/:kanbanItemId          | Updates an item in a Kanban board                     |
+| DELETE | /kanban/:kanbanId/:kanbanItemId          | Deletes an item from a Kanban board                   |
+| GET    | /kanban                                   | Retrieves all Kanban boards for the authenticated user|
+| POST   | /kanban/create                           | Creates a new Kanban board for the authenticated user |
+| GET    | /kanban/:kanbanId                        | Retrieves a specific Kanban board                     |
+| PUT    | /kanban/:kanbanId                        | Updates a specific Kanban board                       |
+| DELETE | /kanban/:kanbanId                        | Deletes a specific Kanban board                       |
+| GET    | /note                                     | Retrieves all notes for the authenticated user        |
+| POST   | /note/create                              | Creates a new note for the authenticated user          |
+| GET    | /note/:noteId                             | Retrieves a specific note                              |
+| PUT    | /note/:noteId                             | Updates a specific note                                |
+| DELETE | /note/:noteId                             | Deletes a specific note                                |
+
 ## Getting Started
 
 1. Clone this repository to your local machine.
