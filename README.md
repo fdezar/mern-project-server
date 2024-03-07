@@ -25,31 +25,31 @@ This repository contains the server-side code for the Productivity App, a full-s
 
 ## Routes
 
-| Method | Endpoint                                 | Description                                            |
-| ------ | ---------------------------------------- | ------------------------------------------------------ |
-| GET    | /                                         | Test endpoint                                          |
-| POST   | /auth/signup                             | Creates a new user in the database                     |
-| POST   | /auth/login                              | Verifies email and password and returns a JWT          |
-| GET    | /auth/verify                             | Used to verify JWT stored on the client                |
-| GET    | /auth/my-profile                         | Retrieves the profile of the authenticated user        |
-| PUT    | /auth/my-profile                         | Updates the profile of the authenticated user          |
-| DELETE | /auth/my-profile                         | Deletes the profile of the authenticated user          |
-| POST   | /auth/upload-image                       | Uploads an image for the authenticated user            |
-| PUT    | /auth/:userId/update-image               | Updates the image of the specified user                |
-| PUT    | /auth/:userId/delete-image               | Deletes the image of the specified user                |
-| POST   | /kanban/:kanbanId/createItem             | Creates a new item in a Kanban board                  |
-| PUT    | /kanban/:kanbanId/:kanbanItemId          | Updates an item in a Kanban board                     |
-| DELETE | /kanban/:kanbanId/:kanbanItemId          | Deletes an item from a Kanban board                   |
-| GET    | /kanban                                   | Retrieves all Kanban boards for the authenticated user|
-| POST   | /kanban/create                           | Creates a new Kanban board for the authenticated user |
-| GET    | /kanban/:kanbanId                        | Retrieves a specific Kanban board                     |
-| PUT    | /kanban/:kanbanId                        | Updates a specific Kanban board                       |
-| DELETE | /kanban/:kanbanId                        | Deletes a specific Kanban board                       |
-| GET    | /note                                     | Retrieves all notes for the authenticated user        |
-| POST   | /note/create                              | Creates a new note for the authenticated user          |
-| GET    | /note/:noteId                             | Retrieves a specific note                              |
-| PUT    | /note/:noteId                             | Updates a specific note                                |
-| DELETE | /note/:noteId                             | Deletes a specific note                                |
+Below are the routes available in the server-side application:
+
+| Route                         | Method | Description                                                   |
+|-------------------------------|--------|---------------------------------------------------------------|
+| `/api`                        | GET    | Returns a message indicating successful connection            |
+| `/api/auth/signup`            | POST   | Creates a new user in the database                            |
+| `/api/auth/login`             | POST   | Verifies email and password and returns a JWT                 |
+| `/api/auth/verify`            | GET    | Used to verify JWT stored on the client                       |
+| `/api/auth/my-profile`        | GET    | Retrieves user profile information                            |
+| `/api/auth/my-profile`        | PUT    | Updates user profile information                              |
+| `/api/auth/my-profile`        | DELETE | Deletes user profile                                          |
+| `/api/auth/upload-image`      | POST   | Uploads user profile image                                    |
+| `/api/kanban`                 | GET    | Retrieves all kanban boards for the authenticated user        |
+| `/api/kanban/create`          | POST   | Creates a new kanban board for the authenticated user         |
+| `/api/kanban/:kanbanId`       | GET    | Retrieves a specific kanban board by ID                       |
+| `/api/kanban/:kanbanId`       | PUT    | Updates a specific kanban board by ID                         |
+| `/api/kanban/:kanbanId`       | DELETE | Deletes a specific kanban board by ID                         |
+| `/api/kanban/:kanbanId/createItem` | POST   | Creates a new kanban item within a kanban board               |
+| `/api/kanban/:kanbanId/:kanbanItemId` | PUT    | Updates a specific kanban item within a kanban board by ID    |
+| `/api/kanban/:kanbanId/:kanbanItemId` | DELETE | Deletes a specific kanban item within a kanban board by ID    |
+| `/api/notes`                  | GET    | Retrieves all notes for the authenticated user                |
+| `/api/notes/create`           | POST   | Creates a new note for the authenticated user                 |
+| `/api/notes/:noteId`          | GET    | Retrieves a specific note by ID                               |
+| `/api/notes/:noteId`          | PUT    | Updates a specific note by ID                                 |
+| `/api/notes/:noteId`          | DELETE | Deletes a specific note by ID                                 |
 
 ## Getting Started
 
