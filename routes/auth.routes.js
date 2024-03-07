@@ -133,19 +133,19 @@ router.get("/verify", isAuthenticated, (req, res, next) => {
   res.status(200).json(req.payload);
 });
 
-router.get("/:userId", isAuthenticated, (req, res, next) => {
-  const { userId } = req.params;
+router.get("/my-profile", isAuthenticated, (req, res, next) => {
+  // const { userId } = req.params;
 
   // ToDo - mirar que si estás en un perfil ajeno, puedas acceder al tuyo. Keep the profile page to the currentUser
 
-  // const { _id } = req.payload;
+  const { _id } = req.payload;
 
-  if (!mongoose.Types.ObjectId.isValid(userId)) {
+  if (!mongoose.Types.ObjectId.isValid(_id)) {
     res.status(400).json({ message: "Specified id is not valid" });
     return;
   }
 
-  User.findById(userId)
+  User.findById(_id)
     .then((userFound) => {
       return res.json(userFound);
     })
@@ -156,21 +156,22 @@ router.get("/:userId", isAuthenticated, (req, res, next) => {
 });
 
 router.put(
-  "/:userId",
+  "/my-profile",
   isAuthenticated,
   (req, res, next) => {
-    const { userId } = req.params;
+    // const { userId } = req.params;
+    const { _id } = req.payload;
     const { username, firstName, lastName, email, password, aboutMe } =
       req.body;
     // ToDo - mirar el tema de la imagen
 
-    if (!mongoose.Types.ObjectId.isValid(userId)) {
+    if (!mongoose.Types.ObjectId.isValid(_id)) {
       res.status(400).json({ message: "Specified id is not valid" });
       return;
     }
 
     User.findByIdAndUpdate(
-      userId,
+      _id,
       { username, firstName, lastName, email, password, aboutMe },
       { new: true }
     )
@@ -183,15 +184,16 @@ router.put(
   }
 );
 
-router.delete("/:userId", isAuthenticated, (req, res, next) => {
-  const { userId } = req.params;
+router.delete("/my-profile", isAuthenticated, (req, res, next) => {
+  // const { userId } = req.params;
+  const { _id } = req.payload;
 
-  if (!mongoose.Types.ObjectId.isValid(userId)) {
+  if (!mongoose.Types.ObjectId.isValid(_id)) {
     res.status(400).json({ message: "Specified id is not valid" });
     return;
   }
 
-  User.findByIdAndDelete(userId)
+  User.findByIdAndDelete(_id)
     .then(() => {
       return res.json({
         message: `User with ${userId} has been removed succesfully`,

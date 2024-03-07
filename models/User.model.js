@@ -11,6 +11,7 @@ const userSchema = new Schema(
     firstName: {
       type: String,
       trim: true
+      // idea: poner un default para que no me de error en el front
     },
     lastName: {
       type: String,
