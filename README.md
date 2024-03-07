@@ -1,12 +1,6 @@
-# MERN-Project-server
+# Silk MERN Full Stack App - Server Side
 
-Provisional README.
-
-Tabla con las rutas del back y los modelos
-
-# Productivity App - Server Side
-
-This repository contains the server-side code for the Productivity App, a full-stack productivity application built using the MERN stack. The server handles user authentication, manages tasks and notes data, and interacts with the MongoDB database.
+This repository contains the server-side code for Silk, a full-stack productivity application built using the MERN stack. The server handles user authentication, manages tasks and notes data, and interacts with the MongoDB database.
 
 ## Features
 
