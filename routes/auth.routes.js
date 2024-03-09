@@ -23,7 +23,8 @@ const saltRounds = 10;
 
 // POST /auth/signup  - Creates a new user in the database
 router.post("/signup", (req, res, next) => {
-  const { email, password, username } = req.body;
+
+  const { email, password, username, firstName, lastName, aboutMe, userImage } = req.body;
 
   // Check if email or password or name are provided as empty strings
   if (email === "" || password === "" || username === "") {
@@ -63,15 +64,16 @@ router.post("/signup", (req, res, next) => {
 
       // Create the new user in the database
       // We return a pending promise, which allows us to chain another `then`
-      return User.create({ email, password: hashedPassword, username });
+      return User.create({ email, password: hashedPassword, username, firstName, lastName, aboutMe, userImage });
     })
     .then((createdUser) => {
       // Deconstruct the newly created user object to omit the password
       // We should never expose passwords publicly
-      const { email, username, _id } = createdUser;
+      return console.log(createdUser);
+      const { email, username, _id, firstName, lastName, aboutMe, userImage } = createdUser;
 
       // Create a new object that doesn't expose the password
-      const user = { email, username, _id };
+      const user = { email, username, _id, firstName, lastName, aboutMe, userImage };
 
       // Send a json response containing the user object
       res.status(201).json({ user: user });
@@ -213,23 +215,25 @@ router.post(
 
     const { _id } = req.payload;
 
-    if (!req.file) {
-      next(new Error("No file uploaded!"));
-      return;
+    if (!req.hasOwnProperty('file')) {
+      // next(new Error("No file uploaded!"));
+      return res.json({ fileUrl: "" });
     }
 
-    User.findByIdAndUpdate(
-      _id,
-      { $set: { userImage: req.file.path }}, 
-      { new: true }
-      )
-      .then(() => {
-        return res.json({ fileUrl: req.file.path });
-      })
-      .catch((err) => {
-        console.error("Error in file uploading:", err);
-        res.status(500).json({ message: "Error in file uploading" });
-      });
+    return res.json({ fileUrl: req.file.path });
+
+    // User.findByIdAndUpdate(
+    //   _id,
+    //   { $set: { userImage: req.file.path }}, 
+    //   { new: true }
+    //   )
+    //   .then(() => {
+    //     return res.json({ fileUrl: req.file.path });
+    //   })
+    //   .catch((err) => {
+    //     console.error("Error in file uploading:", err);
+    //     res.status(500).json({ message: "Error in file uploading" });
+    //   });
   }
 );
 
