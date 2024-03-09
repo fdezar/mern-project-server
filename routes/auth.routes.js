@@ -69,7 +69,6 @@ router.post("/signup", (req, res, next) => {
     .then((createdUser) => {
       // Deconstruct the newly created user object to omit the password
       // We should never expose passwords publicly
-      return console.log(createdUser);
       const { email, username, _id, firstName, lastName, aboutMe, userImage } = createdUser;
 
       // Create a new object that doesn't expose the password
@@ -209,31 +208,14 @@ router.delete("/my-profile", isAuthenticated, (req, res, next) => {
 
 router.post(
   "/upload-image",
-  isAuthenticated,
   fileUploader.single("userImage"),
   (req, res, next) => {
 
-    const { _id } = req.payload;
-
     if (!req.hasOwnProperty('file')) {
-      // next(new Error("No file uploaded!"));
       return res.json({ fileUrl: "" });
     }
 
     return res.json({ fileUrl: req.file.path });
-
-    // User.findByIdAndUpdate(
-    //   _id,
-    //   { $set: { userImage: req.file.path }}, 
-    //   { new: true }
-    //   )
-    //   .then(() => {
-    //     return res.json({ fileUrl: req.file.path });
-    //   })
-    //   .catch((err) => {
-    //     console.error("Error in file uploading:", err);
-    //     res.status(500).json({ message: "Error in file uploading" });
-    //   });
   }
 );
 
