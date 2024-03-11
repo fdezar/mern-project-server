@@ -186,6 +186,50 @@ router.put(
   }
 );
 
+router.post('/passwordupdate', isAuthenticated, (req, res, next) => {
+
+  const { currentPassword, newPassword, confirmNewPassword } = req.body;
+  const { email } = req.payload;
+  
+  if ( currentPassword === newPassword ) {
+    res.status(400).json({ message: "New password must not match current one" });
+    return;
+  }
+
+  // Check if the email or password or name is provided as an empty string 
+  if ( currentPassword === '' ) {
+    res.status(400).json({ message: "Provide a valid password" });
+    return;
+  }
+
+  if ( newPassword !== confirmNewPassword || !currentPassword || !newPassword || !confirmNewPassword) {
+    res.status(400).json({ message: "New passwords do not match" });
+    return;
+  }
+
+  User.findOne({ email: email})
+    .then( foundUser => {
+      
+      const passwordCorrect = bcrypt.compareSync(currentPassword, foundUser.password);
+      
+      if (!passwordCorrect ) {
+        return res.status(400).json({ message: "Incorrect password" });
+      }
+
+      const salt = bcrypt.genSaltSync(saltRounds);
+      const hashedPassword = bcrypt.hashSync(newPassword, salt);
+
+      foundUser.password = hashedPassword;
+
+      return foundUser.save();
+      
+    }).then( updatedUser => {
+      
+      res.status(200).json({ message: "Password updated successfully", updatedUser });
+
+    }).catch((err)=>res.json(err))
+});
+
 router.delete("/my-profile", isAuthenticated, (req, res, next) => {
   const { _id } = req.payload;
 
