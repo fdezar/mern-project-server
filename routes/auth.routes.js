@@ -165,6 +165,7 @@ router.put(
     const { username, firstName, lastName, email, password, aboutMe } =
       req.body;
     // ToDo - mirar el tema de la imagen
+    // ToDo - hacer el password en otro lugar
 
     if (!mongoose.Types.ObjectId.isValid(_id)) {
       res.status(400).json({ message: "Specified id is not valid" });
@@ -186,7 +187,6 @@ router.put(
 );
 
 router.delete("/my-profile", isAuthenticated, (req, res, next) => {
-  // const { userId } = req.params;
   const { _id } = req.payload;
 
   if (!mongoose.Types.ObjectId.isValid(_id)) {
@@ -219,10 +219,10 @@ router.post(
   }
 );
 
-router.put("/:userId/update-image", isAuthenticated, fileUploader.single("userImage"), (req, res, next) => {
-  const { userId } = req.params;
+router.put("/my-profile/update-image", isAuthenticated, fileUploader.single("userImage"), (req, res, next) => {
+  const { _id } = req.payload;
 
-  User.findByIdAndUpdate({ _id: userId }, { $set: { userImage: req.file.path }}, { new: true }) // ToDo - mirar esto
+  User.findByIdAndUpdate(_id, { $set: { userImage: req.file.path }}, { new: true }) // ToDo - mirar esto
     .then(() => {
       return res.json({ message: `${userId} image updated successfully` }); 
     })
@@ -232,8 +232,8 @@ router.put("/:userId/update-image", isAuthenticated, fileUploader.single("userIm
     });
 })
 
-router.put("/:userId/delete-image", isAuthenticated, (req, res, next) => {
-  const { userId } = req.params;
+router.put("/my-profile/delete-image", isAuthenticated, (req, res, next) => {
+  const { _id } = req.payload;
 
   User.findByIdAndUpdate({ _id: userId }, { userImage: "/images/default-user-image.png" }, { new: true }) // ToDo - cambiar ruta si es necesario de la imagen
     .then(() => {
