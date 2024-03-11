@@ -18,14 +18,7 @@ require("./config")(app);
 
 // 👇 Start handling routes here
 const indexRoutes = require("./routes/index.routes");
-app.use("/api", createProxyMiddleware({ 
-    target: 'http://localhost:8080/', //original url
-    changeOrigin: true, 
-    //secure: false,
-    onProxyRes: function (proxyRes, req, res) {
-       proxyRes.headers['Access-Control-Allow-Origin'] = '*';
-    }
-}), indexRoutes);
+app.use("/api", indexRoutes);
 
 const authRoutes = require("./routes/auth.routes");
 app.use("/api/auth", authRoutes);
