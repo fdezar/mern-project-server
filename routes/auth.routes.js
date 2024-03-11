@@ -162,7 +162,7 @@ router.put(
   (req, res, next) => {
     // const { userId } = req.params;
     const { _id } = req.payload;
-    const { username, firstName, lastName, email, password, aboutMe } =
+    const { username, firstName, lastName, email, aboutMe } =
       req.body;
     // ToDo - mirar el tema de la imagen
     // ToDo - hacer el password en otro lugar
@@ -174,7 +174,7 @@ router.put(
 
     User.findByIdAndUpdate(
       _id,
-      { username, firstName, lastName, email, password, aboutMe },
+      { username, firstName, lastName, email, aboutMe },
       { new: true }
     )
       .then((userUpdated) => {
