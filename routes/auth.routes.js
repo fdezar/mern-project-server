@@ -266,9 +266,9 @@ router.post(
 router.put("/my-profile/update-image", isAuthenticated, fileUploader.single("userImage"), (req, res, next) => {
   const { _id } = req.payload;
 
-  User.findByIdAndUpdate(_id, { $set: { userImage: req.file.path }}, { new: true }) // ToDo - mirar esto
+  User.findByIdAndUpdate(_id, { $set: { userImage: req.file.path }}, { new: true })
     .then(() => {
-      return res.json({ message: `${userId} image updated successfully` }); 
+      return res.json({ message: `${_id} image updated successfully` }); 
     })
     .catch((err) => {
       console.error("Error updating user image:", err);
@@ -279,7 +279,7 @@ router.put("/my-profile/update-image", isAuthenticated, fileUploader.single("use
 router.put("/my-profile/delete-image", isAuthenticated, (req, res, next) => {
   const { _id } = req.payload;
 
-  User.findByIdAndUpdate({ _id: userId }, { userImage: "/images/default-user-image.png" }, { new: true }) // ToDo - cambiar ruta si es necesario de la imagen
+  User.findByIdAndUpdate(_id, { userImage: "/images/default-user-image.png" }, { new: true }) // ToDo - cambiar ruta si es necesario de la imagen
     .then(() => {
       return res.json({ message: `${userId} image deleted successfully` }); 
     })
