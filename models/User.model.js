@@ -30,7 +30,7 @@ const userSchema = new Schema(
     },
     userImage: {
       type: String,
-      default: "/images/default-icon.png"
+      default: "/src/images/default-icon.png"
     },
     aboutMe: String,
     userKanban: {
