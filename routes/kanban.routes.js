@@ -14,7 +14,7 @@ router.get("/", (req, res, next) => {
       return res.status(200).json(userKanbans);
     })
     .catch((err) => {
-      console.log("Error while retrieving kanban", err);
+      // console.log("Error while retrieving kanban", err);
       res.status(500).json({ message: "Error while retrieving kanban" });
     });
 });
@@ -50,7 +50,7 @@ router.post("/create", async (req, res, next) => {
 
     res.json(updatedUser);
   } catch (err) {
-    console.error("Error creating Kanban:", err);
+    // console.error("Error creating Kanban:", err);
     res.status(500).json({ message: "Error creating Kanban" });
   }
 });
@@ -71,7 +71,7 @@ router.get("/:kanbanId", (req, res, next) => {
       return res.status(200).json(kanbanFound);
     })
     .catch((err) => {
-      console.log("Error while retrieving kanban", err);
+      // console.log("Error while retrieving kanban", err);
       res.status(500).json({ message: "Error while retrieving kanban" });
     });
 });
@@ -90,7 +90,7 @@ router.put("/:kanbanId", (req, res, next) => {
       return res.json(updatedKanban);
     })
     .catch((err) => {
-      console.error("Error while updating Kanban:", err);
+      // console.error("Error while updating Kanban:", err);
       res.status(500).json({ message: "Error updating Kanban" });
     });
 });
@@ -118,7 +118,7 @@ router.delete("/:kanbanId", (req, res, next) => {
       });
     })
     .catch((err) => {
-      console.error("Error in Kanban item removal", err);
+      // console.error("Error in Kanban item removal", err);
       res.status(500).json({ message: "Error deleting Kanban item" });
     });
 });

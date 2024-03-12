@@ -13,7 +13,7 @@ router.get("/", (req, res, next) => {
       return res.json(userNotes);
     })
     .catch((err) => {
-      console.error("Error retrieving all notes:", err);
+      // console.error("Error retrieving all notes:", err);
       res.status(500).json({ message: "Error retrieving all notes" });
     });
 });
@@ -39,7 +39,7 @@ router.post("/create", (req, res, next) => {
       return res.json(newNote);
     })
     .catch((err) => {
-      console.error("Error creating note:", err);
+      // console.error("Error creating note:", err);
       res.status(500).json({ message: "Error creating note" });
     });
 });
@@ -57,7 +57,7 @@ router.get("/:noteId", (req, res, next) => {
       return res.status(200).json(note);
     })
     .catch((err) => {
-      console.error("Error while retrieving note:", err);
+      // console.error("Error while retrieving note:", err);
       res.status(500).json({ message: "Error while retrieving note" });
     });
 });
@@ -76,7 +76,7 @@ router.put("/:noteId", (req, res, next) => {
       return res.json(updatedNote);
     })
     .catch((err) => {
-      console.error("Error while updating the note:", err);
+      // console.error("Error while updating the note:", err);
     });
 });
 
@@ -101,7 +101,7 @@ router.delete("/:noteId", (req, res, next) => {
       return res.json({ message: "Note removed successfully" });
     })
     .catch((err) => {
-      console.error("Error while deleting specified note:", err);
+      // console.error("Error while deleting specified note:", err);
       res.status(500).json({ message: "Error while deleting specified note" });
     });
 });

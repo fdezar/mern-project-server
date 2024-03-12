@@ -24,7 +24,7 @@ router.post("/:kanbanId/createItem", (req, res, next) => {
       return res.json(response);
     })
     .catch((err) => {
-      console.error("Error creating Kanban Item:", err);
+      // console.error("Error creating Kanban Item:", err);
       res.status(500).json({ message: "Error creating Kanban Item" });
     });
 });
@@ -47,7 +47,7 @@ router.put("/:kanbanId/:kanbanItemId", (req, res, next) => {
       return res.json(updatedKanbanItem);
     })
     .catch((err) => {
-      console.error("Error while updating Kanban Item:", err);
+      // console.error("Error while updating Kanban Item:", err);
       res.status(500).json({ message: "Error updating Kanban Item" });
     });
 });
@@ -74,7 +74,7 @@ router.delete("/:kanbanId/:kanbanItemId", (req, res, next) => {
       });
     })
     .catch((err) => {
-      console.error("Error in Kanban item removal", err);
+      // console.error("Error in Kanban item removal", err);
       res.status(500).json({ message: "Error deleting Kanban item" });
     });
 });

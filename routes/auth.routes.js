@@ -128,7 +128,7 @@ router.post("/login", (req, res, next) => {
 router.get("/verify", isAuthenticated, (req, res, next) => {
   // If JWT token is valid the payload gets decoded by the
   // isAuthenticated middleware and is made available on `req.payload`
-  console.log(`req.payload`, req.payload);
+  // console.log(`req.payload`, req.payload);
 
   // Send back the token payload object containing the user data
   res.status(200).json(req.payload);
@@ -148,7 +148,7 @@ router.get("/my-profile", isAuthenticated, (req, res, next) => {
       return res.json(userFound);
     })
     .catch((err) => {
-      console.error("Error finding user:", err);
+      // console.error("Error finding user:", err);
       res.status(500).json({ message: "Error retrieving user" });
     });
 });
@@ -178,7 +178,7 @@ router.put(
         return res.json(userUpdated);
       })
       .catch((err) => {
-        console.error("Error while updating user:", err);
+        // console.error("Error while updating user:", err);
       });
   }
 );
@@ -242,7 +242,7 @@ router.delete("/my-profile", isAuthenticated, (req, res, next) => {
       });
     })
     .catch((err) => {
-      console.error("Error deleting user:", err);
+      // console.error("Error deleting user:", err);
       res.status(500).json({ message: "Error deleting user" });
     });
 });
@@ -268,7 +268,7 @@ router.put("/my-profile/update-image", isAuthenticated, fileUploader.single("use
       return res.json({ message: `${_id} image updated successfully` }); 
     })
     .catch((err) => {
-      console.error("Error updating user image:", err);
+      // console.error("Error updating user image:", err);
       res.status(500).json({ message: "Error updating user image" });
     });
 })
@@ -282,7 +282,7 @@ router.put("/my-profile/delete-image", isAuthenticated, (req, res, next) => {
     })
     .catch((err) => {
       next(err);
-      console.error("Error deleting user image:", err);
+      // console.error("Error deleting user image:", err);
       res.status(500).json({ message: "Error deleting user image" });
     });
 });
