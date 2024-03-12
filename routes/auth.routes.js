@@ -135,9 +135,6 @@ router.get("/verify", isAuthenticated, (req, res, next) => {
 });
 
 router.get("/my-profile", isAuthenticated, (req, res, next) => {
-  // const { userId } = req.params;
-
-  // ToDo - mirar que si estás en un perfil ajeno, puedas acceder al tuyo. Keep the profile page to the currentUser
 
   const { _id } = req.payload;
 

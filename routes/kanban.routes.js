@@ -55,43 +55,6 @@ router.post("/create", async (req, res, next) => {
   }
 });
 
-// router.post("/create", (req, res, next) => {
-//   const { title } = req.body;
-//   const { _id } = req.payload;
-
-//     User.findById(_id)
-//       .then(user => {
-//         if (!user) {
-//           return res.status(404).json({ message: "User not found" });
-//         }
-
-//         if (user.userKanban.length >= 5) {
-//           return res.status(400).json({ message: "Maximum number of Kanbans reached" });
-//         }
-
-//         const kanban = {
-//           title: title,
-//         };
-//         kanban.user = _id;
-
-//         return Kanban.create(kanban);
-//       })
-//       .then(newKanban => {
-//       return User.findByIdAndUpdate(
-//         _id,
-//         { $push: { userKanban: newKanban._id }},
-//         { new: true }
-//         );
-//       })
-//       .then(updatedUser => {
-//         return res.json(updatedUser);
-//       })
-//       .catch((err) => {
-//         console.error("Error creating Kanban:", err);
-//         res.status(500).json({ message: "Error creating Kanban" });
-//       });
-//     });
-
 router.get("/:kanbanId", (req, res, next) => {
   const { kanbanId } = req.params;
 
@@ -161,7 +124,3 @@ router.delete("/:kanbanId", (req, res, next) => {
 });
 
 module.exports = router;
-
-//   if (User.Kanban.length) {
-//      // ToDo - cómo poner el límite. Dónde lo voy a definir? Lo voy a diefinir en variable global como app use...?
-//   }
