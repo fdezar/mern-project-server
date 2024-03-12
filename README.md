@@ -206,8 +206,8 @@ This project is licensed under the MIT License.
 
 ## URL Deploy
 
-Coming soon!
+https://silk-project-server.vercel.app/
 
 ## Slides Link
 
-Coming soon!
+https://www.canva.com/design/DAF-0rn8nHM/_NDxjJoiLqEWz3ixfHGRmQ/view?utm_content=DAF-0rn8nHM&utm_campaign=designshare&utm_medium=link&utm_source=editor
