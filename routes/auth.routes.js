@@ -276,9 +276,9 @@ router.put("/my-profile/update-image", isAuthenticated, fileUploader.single("use
 router.put("/my-profile/delete-image", isAuthenticated, (req, res, next) => {
   const { _id } = req.payload;
 
-  User.findByIdAndUpdate(_id, { userImage: "/images/default-user-image.png" }, { new: true }) // ToDo - cambiar ruta si es necesario de la imagen
+  User.findByIdAndUpdate(_id, { userImage: "/src/images/default-icon.png" }, { new: true }) // ToDo - cambiar ruta si es necesario de la imagen
     .then(() => {
-      return res.json({ message: `${userId} image deleted successfully` }); 
+      return res.json({ message: `${_id} image deleted successfully` }); 
     })
     .catch((err) => {
       next(err);
