@@ -238,7 +238,7 @@ router.delete("/my-profile", isAuthenticated, (req, res, next) => {
   User.findByIdAndDelete(_id)
     .then(() => {
       return res.json({
-        message: `User with ${userId} has been removed succesfully`,
+        message: `User with ${_id} has been removed succesfully`,
       });
     })
     .catch((err) => {
