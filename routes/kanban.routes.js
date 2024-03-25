@@ -9,7 +9,7 @@ router.get("/", (req, res, next) => {
   const { _id } = req.payload;
 
   Kanban.find({ user: _id })
-    .populate("kanbanItems")
+    .populate("cards")
     .then((userKanbans) => {
       return res.status(200).json(userKanbans);
     })
@@ -66,7 +66,7 @@ router.get("/:kanbanId", (req, res, next) => {
   }
 
   Kanban.findById(kanbanId)
-    .populate("kanbanItems")
+    .populate("cards")
     .then((kanbanFound) => {
       return res.status(200).json(kanbanFound);
     })

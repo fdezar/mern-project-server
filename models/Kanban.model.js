@@ -5,9 +5,9 @@ const kanbanSchema = new Schema(
        title: {
             type: String,
        },
-       kanbanItems: [{
+       cards: [{
             type: Schema.Types.ObjectId,
-            ref: "KanbanItem"
+            ref: "Card"
        }],
        user: {
             type: Schema.Types.ObjectId,

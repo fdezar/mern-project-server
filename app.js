@@ -26,8 +26,8 @@ app.use("/api/auth", authRoutes);
 const kanbanRoutes = require("./routes/kanban.routes");
 app.use("/api/kanban", isAuthenticated, kanbanRoutes);
 
-const kanbanItemRoutes = require("./routes/kanbanItem.routes");
-app.use("/api/kanban", isAuthenticated, kanbanItemRoutes);
+const cardRoutes = require("./routes/card.routes");
+app.use("/api/kanban", isAuthenticated, cardRoutes);
 
 const notesRoutes = require("./routes/notes.routes");
 app.use("/api/notes", isAuthenticated, notesRoutes);

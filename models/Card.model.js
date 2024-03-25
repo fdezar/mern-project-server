@@ -1,11 +1,8 @@
 const { Schema, model } = require("mongoose");
 
-const kanbanItemSchema = new Schema(
+const cardSchema = new Schema(
     {
-       title: {
-            type: String,
-       },
-       description: {
+       text: {
             type: String,
        },
        kanbanParent: {
@@ -18,6 +15,6 @@ const kanbanItemSchema = new Schema(
     }
 )
 
-const KanbanItem = model("KanbanItem", kanbanItemSchema);
+const Card = model("Card", cardSchema);
 
-module.exports = KanbanItem;
+module.exports = Card;
