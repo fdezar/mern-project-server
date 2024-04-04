@@ -80,6 +80,7 @@ router.put("/:toDoListItemId", (req, res, next) => {
 
 router.delete("/:toDoListItemId", (req, res, next) => {
     const { toDoListItemId } = req.params;
+    const { _id } = req.payload;
     
     if (!mongoose.Types.ObjectId.isValid(toDoListItemId)) {
         res.status(400).json({ message: "Specified id is not valid" });
@@ -87,6 +88,13 @@ router.delete("/:toDoListItemId", (req, res, next) => {
     }
     
     ToDoListItem.findByIdAndDelete(toDoListItemId)
+    .then(() => {
+        return User.findByIdAndUpdate(
+          _id,
+          { $pull: { userToDoListItems: toDoListItemId }},
+          { new: true }
+        );
+      })
     .then(() => {
         return res.json({ message: "ToDoListItem removed successfully"});
     })
