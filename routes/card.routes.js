@@ -51,6 +51,66 @@ router.put("/:kanbanId/:cardId", (req, res, next) => {
     });
 });
 
+// router.patch("/:kanbanId/:cardId/move", (req, res, next) => {
+//   const { fromId, toId, toIndex } = req.body;
+//   const { kanbanId, cardId } = req.params;
+
+//   if (!mongoose.Types.ObjectId.isValid(cardId)) {
+//     res.status(400).json({ message: "Please provide a valid id" });
+//     return;
+//   }
+
+//   Kanban.findById(fromId)
+//     .then(from => {
+//       if (!from) {
+//         throw new Error("From list not found");
+//       }
+//       return Kanban.findById(toId);
+//     })
+//     .then(to => {
+//       if (!to) {
+//         throw new Error("To list not found");
+//       }
+
+//       if (fromId === toId) {
+//         to = from;
+//       }
+
+//       return { from, to };
+//     })
+//     .then(({ from, to }) => {
+//       const fromIndex = from.cards.indexOf(cardId);
+//       if (fromIndex !== -1) {
+//         from.cards.splice(fromIndex, 1);
+//         return from.save();
+//       } else {
+//         return Promise.resolve();
+//       }
+//     })
+//     .then(() => {
+//       return List.findById(toId);
+//     })
+//     .then(to => {
+//       if (!to.cards.includes(cardId)) {
+//         if (toIndex === 0 || toIndex) {
+//           to.cards.splice(toIndex, 0, cardId);
+//         } else {
+//           to.cards.push(cardId);
+//         }
+//         return to.save();
+//       } else {
+//         return Promise.resolve();
+//       }
+//     })
+//     .then(() => {
+//       res.status(200).send({ cardId, from, to });
+//     })
+//     .catch(err => {
+//       console.error(err);
+//       res.status(500).send("Server Error");
+//     });
+// });
+
 router.delete("/:kanbanId/:cardId", (req, res, next) => {
   const { kanbanId, cardId } = req.params;
 

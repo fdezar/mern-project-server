@@ -95,6 +95,18 @@ router.put("/:kanbanId", (req, res, next) => {
     });
 });
 
+// router.patch("/:kanbanId/move", (req, res, next) => {
+//   const { kanbanId } = req.params;
+
+
+//   if (!mongoose.Types.ObjectId.isValid(kanbanId)) {
+//     res.status(400).json({ message: "Please provide a valid id" });
+//     return;
+//   }
+
+  
+// });
+
 router.delete("/:kanbanId", (req, res, next) => {
   const { kanbanId } = req.params;
   const { _id } = req.payload;
