@@ -31,7 +31,8 @@ router.post("/create", (req, res, next) => {
         return User.findByIdAndUpdate(
           _id,
           { $push: { userToDoListItems: newToDoListItem._id }}
-        );
+        )
+        .then(() => newToDoListItem)
       })
       .then((newToDoListItem) => {
         return res.json(newToDoListItem);
