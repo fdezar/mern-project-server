@@ -40,6 +40,10 @@ const userSchema = new Schema(
     userNotes: [{
       type: Schema.Types.ObjectId,
       ref: "Note"
+    }],
+    userToDoListItems: [{
+      type: Schema.Types.ObjectId,
+      ref: "ToDoListItem"
     }]
   },
   {
