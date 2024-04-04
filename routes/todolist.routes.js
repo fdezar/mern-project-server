@@ -3,30 +3,43 @@ const router = express.Router();
 const mongoose = require("mongoose");
 
 const ToDoListItem = require("../models/ToDoListItem.model");
+const User = require("../models/User.model");
 
 router.get("/", (req, res, next) => {
-    ToDoListItem.find()
-        // ToDo - asignar notas al usuario
-        .then(allToDoListItems => {
-            return res.json(allToDoListItems);
-        })
-        .catch(err => {
-            console.error("Error retrieving all toDoListItems:", err);
-            res.status(500).json({ message: "Error retrieving all toDoListItems" });
-        })
+    const { _id } = req.payload;
+
+  ToDoListItem.find({ user: _id })
+    .then((userToDoListItems) => {
+      return res.json(userToDoListItems);
+    })
+    .catch((err) => {
+      res.status(500).json({ message: "Error retrieving all toDoListItems" });
+    });
 });
 
 router.post("/create", (req, res, next) => {
     const { content } = req.body;
-    
-    ToDoListItem.create({ content })
-    .then(newToDoListItem => {
+    const { _id } = req.payload;
+
+    const toDoListItem = {
+      content: content
+    };
+    toDoListItem.user = _id;
+
+    ToDoListItem.create(toDoListItem)
+      .then(newToDoListItem => {
+        return User.findByIdAndUpdate(
+          _id,
+          { $push: { userToDoListItems: newToDoListItem._id }}
+        );
+      })
+      .then((newToDoListItem) => {
         return res.json(newToDoListItem);
-    })
-    .catch(err => {
-        console.error("Error creating toDoListItem:", err);
+      })
+      .catch((err) => {
+        // console.error("Error creating note:", err);
         res.status(500).json({ message: "Error creating toDoListItem" });
-    })
+      });
 });
 
 router.get("/:toDoListItemId", (req, res, next) => {

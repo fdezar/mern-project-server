@@ -32,6 +32,9 @@ app.use("/api/kanban", isAuthenticated, cardRoutes);
 const notesRoutes = require("./routes/notes.routes");
 app.use("/api/notes", isAuthenticated, notesRoutes);
 
+const toDoListRoutes = require("./routes/todolist.routes");
+app.use("/api/todolist", isAuthenticated, toDoListRoutes);
+
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
 
