@@ -1,5 +1,7 @@
 # Silk MERN Full Stack App - Server Side
 
+![silk-logo](src/assets/images/silk-logo-readme.png)
+
 This repository contains the server-side code for Silk, a full-stack productivity application built using the MERN stack. The server handles user authentication, manages tasks and notes data, and interacts with the MongoDB database.
 
 ## Features 💡
