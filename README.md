@@ -2,14 +2,14 @@
 
 This repository contains the server-side code for Silk, a full-stack productivity application built using the MERN stack. The server handles user authentication, manages tasks and notes data, and interacts with the MongoDB database.
 
-## Features
+## Features 💡
 
 - RESTful API endpoints for user authentication, tasks, and notes management
 - JWT-based authentication for securing routes
 - MongoDB database for storing user data
 - Integration with Cloudinary for managing images
 
-## Technologies Used
+## Technologies Used 💻
 
 - Node.js: JavaScript runtime for building server-side applications
 - Express: Web application framework for Node.js
@@ -17,7 +17,7 @@ This repository contains the server-side code for Silk, a full-stack productivit
 - Mongoose: MongoDB object modeling tool for Node.js
 - Bcrypt: Library for hashing passwords for secure authentication
 
-## Routes
+## Routes 🛣️
 
 Below are the routes available in the server-side application:
 
@@ -49,7 +49,7 @@ Below are the routes available in the server-side application:
 
 ## Models
 
-### User Model
+### User Model 👤
 
 ```javascript
 const { Schema, model } = require("mongoose");
@@ -105,7 +105,7 @@ const User = model("User", userSchema);
 module.exports = User;
 ```
 
-## Kanban Model
+## Kanban Model 📑
 
 ```javascript
 const { Schema, model } = require("mongoose");
@@ -134,7 +134,7 @@ const Kanban = model("Kanban", kanbanSchema);
 module.exports = Kanban;
 ```
 
-## KanbanItem Model
+## KanbanItem Model 📋
 
 ```javascript
 const { Schema, model } = require("mongoose");
@@ -162,7 +162,7 @@ const KanbanItem = model("KanbanItem", kanbanItemSchema);
 module.exports = KanbanItem;
 ```
 
-## Note Model
+## Note Model 📝
 
 ```javascript
 const { Schema, model } = require("mongoose");
@@ -192,7 +192,7 @@ const Note = model("Note", noteSchema);
 module.exports = Note;
 ```
 
-## Getting Started
+## Getting Started 🚀
 
 1. Clone this repository to your local machine.
 2. Navigate to the project directory.
@@ -200,14 +200,14 @@ module.exports = Note;
 4. Create a `.env` file based on the `.env.example` file and fill in the necessary environment variables.
 5. Start the server using `npm start`.
 
-## License
+## License 📝
 
 This project is licensed under the MIT License.
 
-## URL Deploy
+## URL Deploy 🌐
 
 https://silk-project-server.vercel.app/
 
-## Slides Link
+## Slides Link 📑
 
 https://www.canva.com/design/DAF-0rn8nHM/_NDxjJoiLqEWz3ixfHGRmQ/view?utm_content=DAF-0rn8nHM&utm_campaign=designshare&utm_medium=link&utm_source=editor
