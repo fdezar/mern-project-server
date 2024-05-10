@@ -33,10 +33,10 @@ const userSchema = new Schema(
       default: "/src/images/default-icon.png"
     },
     aboutMe: String,
-    userKanban: {
+    userKanban: [{
       type: Schema.Types.ObjectId,
       ref: "Kanban"
-    },
+    }],
     userNotes: [{
       type: Schema.Types.ObjectId,
       ref: "Note"
